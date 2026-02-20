@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=CodeDesignerLite
+Comment=MIPS Assembly Compiler for PlayStation 2
+Exec=CodeDesignerLite %f
+Icon=codedesignerlite
+Type=Application
+Categories=Development;IDE;
+MimeType=application/x-cds;
+StartupNotify=true

@@ -1,0 +1,205 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit">
+
+    <Styles.Resources>
+        <!-- Color Definitions from Form1.cs lines 64-79 -->
+        <Color x:Key="FormBackground">#2C2F33</Color>          <!-- 44, 47, 51 -->
+        <Color x:Key="PaneBackground">#36393F</Color>          <!-- 54, 57, 63 -->
+        <Color x:Key="ControlBackground">#464A50</Color>       <!-- 70, 74, 80 -->
+        <Color x:Key="ControlHover">#4F545C</Color>           <!-- 79, 84, 92 -->
+        <Color x:Key="TextPrimary">#DCDDDE</Color>            <!-- 220, 221, 222 -->
+        <Color x:Key="TextSecondary">#B9BBBE</Color>          <!-- 185, 187, 190 -->
+        <Color x:Key="Accent">#7289DA</Color>                 <!-- 114, 137, 218 - Brighter Blue -->
+        <Color x:Key="AccentHover">#5B6EAE</Color>            <!-- 91, 110, 174 -->
+        <Color x:Key="SaveGreen">#43B581</Color>              <!-- 67, 181, 129 - Vibrant Green -->
+        <Color x:Key="SaveGreenHover">#3CA374</Color>         <!-- 60, 163, 116 -->
+        <Color x:Key="ErrorBackground">#F04747</Color>        <!-- 240, 71, 71 -->
+        <Color x:Key="EditorBackground">#23272A</Color>       <!-- 35, 39, 42 -->
+        <Color x:Key="CaretColor">#DCDDDE</Color>             <!-- 220, 221, 222 -->
+        <Color x:Key="MarginBackground">#303338</Color>       <!-- 48, 51, 56 -->
+        <Color x:Key="MenuBackground">#3A3D43</Color>         <!-- 58, 61, 67 -->
+        <Color x:Key="MenuHover">#464A50</Color>              <!-- 70, 74, 80 -->
+
+        <!-- Brushes -->
+        <SolidColorBrush x:Key="FormBackgroundBrush" Color="{StaticResource FormBackground}"/>
+        <SolidColorBrush x:Key="PaneBackgroundBrush" Color="{StaticResource PaneBackground}"/>
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource ControlBackground}"/>
+        <SolidColorBrush x:Key="ControlHoverBrush" Color="{StaticResource ControlHover}"/>
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="{StaticResource AccentHover}"/>
+        <SolidColorBrush x:Key="SaveGreenBrush" Color="{StaticResource SaveGreen}"/>
+        <SolidColorBrush x:Key="SaveGreenHoverBrush" Color="{StaticResource SaveGreenHover}"/>
+        <SolidColorBrush x:Key="ErrorBackgroundBrush" Color="{StaticResource ErrorBackground}"/>
+        <SolidColorBrush x:Key="EditorBackgroundBrush" Color="{StaticResource EditorBackground}"/>
+        <SolidColorBrush x:Key="CaretColorBrush" Color="{StaticResource CaretColor}"/>
+        <SolidColorBrush x:Key="MarginBackgroundBrush" Color="{StaticResource MarginBackground}"/>
+        <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource MenuBackground}"/>
+        <SolidColorBrush x:Key="MenuHoverBrush" Color="{StaticResource MenuHover}"/>
+
+        <!-- Override Fluent Theme Menu Resources -->
+        <SolidColorBrush x:Key="MenuFlyoutPresenterBackground" Color="{StaticResource MenuBackground}"/>
+        <SolidColorBrush x:Key="MenuFlyoutPresenterBorderBrush" Color="{StaticResource ControlBackground}"/>
+        <SolidColorBrush x:Key="MenuBarItemBackground" Color="{StaticResource MenuBackground}"/>
+        <SolidColorBrush x:Key="MenuBarItemBackgroundPointerOver" Color="{StaticResource MenuHover}"/>
+        <SolidColorBrush x:Key="MenuBarItemBackgroundPressed" Color="{StaticResource MenuHover}"/>
+        <SolidColorBrush x:Key="MenuBarItemBackgroundSelected" Color="{StaticResource MenuHover}"/>
+    </Styles.Resources>
+
+    <!-- Window Styling -->
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{StaticResource FormBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    </Style>
+
+    <!-- Border Styling -->
+    <Style Selector="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource PaneBackgroundBrush}"/>
+    </Style>
+
+    <!-- Menu Styling -->
+    <Style Selector="Menu">
+        <Setter Property="Background" Value="{StaticResource MenuBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="MenuItem">
+        <Setter Property="Background" Value="{StaticResource MenuBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="MenuItem:pointerover /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{StaticResource MenuHoverBrush}"/>
+    </Style>
+
+    <Style Selector="MenuItem:selected /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{StaticResource MenuHoverBrush}"/>
+    </Style>
+
+    <!-- TextBlock Styling -->
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    </Style>
+
+    <!-- TextBox Styling -->
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="SelectionBrush" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource CaretColorBrush}"/>
+    </Style>
+
+    <!-- ComboBox Styling -->
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ControlBackgroundBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBox /template/ Border#PopupBorder">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ControlBackgroundBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBox /template/ ScrollViewer#PART_ScrollViewer">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource ControlHoverBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+    </Style>
+
+    <!-- RadioButton Styling -->
+    <Style Selector="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    </Style>
+
+    <!-- Button Base Styling -->
+    <Style Selector="Button">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource ControlHoverBrush}"/>
+    </Style>
+
+    <!-- Compile Button (Accent Blue) -->
+    <Style Selector="Button.CompileButton">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style Selector="Button.CompileButton:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AccentHoverBrush}"/>
+    </Style>
+
+    <!-- Copy Button (Green) -->
+    <Style Selector="Button.CopyButton">
+        <Setter Property="Background" Value="{StaticResource SaveGreenBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style Selector="Button.CopyButton:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource SaveGreenHoverBrush}"/>
+    </Style>
+
+    <!-- Standard Button (Gray) -->
+    <Style Selector="Button.StandardButton">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style Selector="Button.StandardButton:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource ControlHoverBrush}"/>
+    </Style>
+
+    <!-- AvaloniaEdit TextEditor Styling -->
+    <Style Selector="avaloniaEdit|TextEditor">
+        <Setter Property="Background" Value="{StaticResource EditorBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="LineNumbersForeground" Value="{StaticResource TextSecondaryBrush}"/>
+    </Style>
+
+    <!-- ScrollBar Styling for Dark Theme -->
+    <Style Selector="ScrollBar">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+    </Style>
+
+    <Style Selector="ScrollBar:vertical /template/ RepeatButton#PART_LineUpButton">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+    </Style>
+
+    <Style Selector="ScrollBar:vertical /template/ RepeatButton#PART_LineDownButton">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+    </Style>
+
+    <Style Selector="ScrollBar /template/ Thumb">
+        <Setter Property="Background" Value="{StaticResource TextSecondaryBrush}"/>
+    </Style>
+
+    <Style Selector="ScrollBar /template/ Thumb:pointerover">
+        <Setter Property="Background" Value="{StaticResource TextPrimaryBrush}"/>
+    </Style>
+
+</Styles>

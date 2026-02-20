@@ -1,0 +1,495 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name="MipsAssembly" extensions=".asm;.s;.txt;.cds" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+  <!-- Define colors matching Form1.cs lines 81-103 -->
+  <Color name="Comment" foreground="#8E9297" fontStyle="italic" />
+  <Color name="Instruction" foreground="#DCDDDE" />
+  <Color name="Directive" foreground="#64DC64" fontWeight="bold" />
+  <Color name="DirectivePrintImport" foreground="#B478D2" />
+  <Color name="DirectiveHexFloat" foreground="#ADD8E6" />
+  <Color name="RegisterA" foreground="#50A7EE" />
+  <Color name="RegisterT" foreground="#E6AADC" />
+  <Color name="RegisterV" foreground="#FA776D" />
+  <Color name="RegisterS" foreground="#F1C40F" />
+  <Color name="RegisterSP" foreground="#F5AB35" />
+  <Color name="RegisterRA" foreground="#E74C3C" />
+  <Color name="RegisterF" foreground="#77DD77" />
+  <Color name="RegisterGP" foreground="#2ECC71" />
+  <Color name="RegisterK" foreground="#9B59B6" />
+  <Color name="RegisterAT" foreground="#ADD8E6" />
+  <Color name="RegisterZero" foreground="#808080" />
+  <Color name="RegisterFP" foreground="#DCDCAA" />
+  <Color name="RegisterOther" foreground="#4FC1FF" />
+  <Color name="Label" foreground="#F1C83C" fontWeight="bold" />
+  <Color name="BasicLabel" foreground="#D3B06E" />
+  <Color name="Number" foreground="#DCDDDE" />
+  <Color name="DollarHex" foreground="#D4D4D4" />
+  <Color name="String" foreground="#DCDDDE" />
+
+  <!-- Main ruleset -->
+  <RuleSet ignoreCase="true">
+
+    <!-- Comments (highest priority) -->
+    <Span color="Comment" multiline="true">
+      <Begin>/\*</Begin>
+      <End>\*/</End>
+    </Span>
+    <Span color="Comment">
+      <Begin>//</Begin>
+    </Span>
+    <Span color="Comment">
+      <Begin>\#</Begin>
+    </Span>
+
+    <!-- Strings -->
+    <Span color="String">
+      <Begin>"</Begin>
+      <End>"</End>
+      <RuleSet>
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+
+    <!-- Labels: FNC prefix gets special coloring -->
+    <Rule color="Label">
+      ^\s*FNC\w*:
+    </Rule>
+    <Rule color="BasicLabel">
+      ^\s*\w+:
+    </Rule>
+
+    <!-- Dollar hex values (e.g., $FF00) -->
+    <Rule color="DollarHex">
+      \$[0-9a-fA-F]+\b
+    </Rule>
+
+    <!-- Hex numbers (e.g., 0xFF00) -->
+    <Rule color="Number">
+      \b0x[0-9a-fA-F]+\b
+    </Rule>
+
+    <!-- Decimal and floating point numbers -->
+    <Rule color="Number">
+      (?&lt;![\w.:$])\-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b
+    </Rule>
+
+    <!-- Registers (specific coloring per register type) -->
+    <!-- Zero register -->
+    <Keywords color="RegisterZero">
+      <Word>zero</Word>
+      <Word>$zero</Word>
+      <Word>0</Word>
+      <Word>$0</Word>
+    </Keywords>
+
+    <!-- AT register -->
+    <Keywords color="RegisterAT">
+      <Word>at</Word>
+      <Word>$at</Word>
+      <Word>1</Word>
+      <Word>$1</Word>
+    </Keywords>
+
+    <!-- V registers (v0, v1) -->
+    <Keywords color="RegisterV">
+      <Word>v0</Word>
+      <Word>$v0</Word>
+      <Word>2</Word>
+      <Word>$2</Word>
+      <Word>v1</Word>
+      <Word>$v1</Word>
+      <Word>3</Word>
+      <Word>$3</Word>
+    </Keywords>
+
+    <!-- A registers (a0-a3) -->
+    <Keywords color="RegisterA">
+      <Word>a0</Word>
+      <Word>$a0</Word>
+      <Word>4</Word>
+      <Word>$4</Word>
+      <Word>a1</Word>
+      <Word>$a1</Word>
+      <Word>5</Word>
+      <Word>$5</Word>
+      <Word>a2</Word>
+      <Word>$a2</Word>
+      <Word>6</Word>
+      <Word>$6</Word>
+      <Word>a3</Word>
+      <Word>$a3</Word>
+      <Word>7</Word>
+      <Word>$7</Word>
+    </Keywords>
+
+    <!-- T registers (t0-t9) -->
+    <Keywords color="RegisterT">
+      <Word>t0</Word>
+      <Word>$t0</Word>
+      <Word>8</Word>
+      <Word>$8</Word>
+      <Word>t1</Word>
+      <Word>$t1</Word>
+      <Word>9</Word>
+      <Word>$9</Word>
+      <Word>t2</Word>
+      <Word>$t2</Word>
+      <Word>10</Word>
+      <Word>$10</Word>
+      <Word>t3</Word>
+      <Word>$t3</Word>
+      <Word>11</Word>
+      <Word>$11</Word>
+      <Word>t4</Word>
+      <Word>$t4</Word>
+      <Word>12</Word>
+      <Word>$12</Word>
+      <Word>t5</Word>
+      <Word>$t5</Word>
+      <Word>13</Word>
+      <Word>$13</Word>
+      <Word>t6</Word>
+      <Word>$t6</Word>
+      <Word>14</Word>
+      <Word>$14</Word>
+      <Word>t7</Word>
+      <Word>$t7</Word>
+      <Word>15</Word>
+      <Word>$15</Word>
+      <Word>t8</Word>
+      <Word>$t8</Word>
+      <Word>24</Word>
+      <Word>$24</Word>
+      <Word>t9</Word>
+      <Word>$t9</Word>
+      <Word>25</Word>
+      <Word>$25</Word>
+    </Keywords>
+
+    <!-- S registers (s0-s7) -->
+    <Keywords color="RegisterS">
+      <Word>s0</Word>
+      <Word>$s0</Word>
+      <Word>16</Word>
+      <Word>$16</Word>
+      <Word>s1</Word>
+      <Word>$s1</Word>
+      <Word>17</Word>
+      <Word>$17</Word>
+      <Word>s2</Word>
+      <Word>$s2</Word>
+      <Word>18</Word>
+      <Word>$18</Word>
+      <Word>s3</Word>
+      <Word>$s3</Word>
+      <Word>19</Word>
+      <Word>$19</Word>
+      <Word>s4</Word>
+      <Word>$s4</Word>
+      <Word>20</Word>
+      <Word>$20</Word>
+      <Word>s5</Word>
+      <Word>$s5</Word>
+      <Word>21</Word>
+      <Word>$21</Word>
+      <Word>s6</Word>
+      <Word>$s6</Word>
+      <Word>22</Word>
+      <Word>$22</Word>
+      <Word>s7</Word>
+      <Word>$s7</Word>
+      <Word>23</Word>
+      <Word>$23</Word>
+    </Keywords>
+
+    <!-- K registers (k0, k1) -->
+    <Keywords color="RegisterK">
+      <Word>k0</Word>
+      <Word>$k0</Word>
+      <Word>26</Word>
+      <Word>$26</Word>
+      <Word>k1</Word>
+      <Word>$k1</Word>
+      <Word>27</Word>
+      <Word>$27</Word>
+    </Keywords>
+
+    <!-- GP register -->
+    <Keywords color="RegisterGP">
+      <Word>gp</Word>
+      <Word>$gp</Word>
+      <Word>28</Word>
+      <Word>$28</Word>
+    </Keywords>
+
+    <!-- SP register -->
+    <Keywords color="RegisterSP">
+      <Word>sp</Word>
+      <Word>$sp</Word>
+      <Word>29</Word>
+      <Word>$29</Word>
+    </Keywords>
+
+    <!-- FP register -->
+    <Keywords color="RegisterFP">
+      <Word>fp</Word>
+      <Word>$fp</Word>
+      <Word>30</Word>
+      <Word>$30</Word>
+    </Keywords>
+
+    <!-- RA register -->
+    <Keywords color="RegisterRA">
+      <Word>ra</Word>
+      <Word>$ra</Word>
+      <Word>31</Word>
+      <Word>$31</Word>
+    </Keywords>
+
+    <!-- F registers (floating point: f0-f31) -->
+    <Keywords color="RegisterF">
+      <Word>f0</Word>
+      <Word>$f0</Word>
+      <Word>f1</Word>
+      <Word>$f1</Word>
+      <Word>f2</Word>
+      <Word>$f2</Word>
+      <Word>f3</Word>
+      <Word>$f3</Word>
+      <Word>f4</Word>
+      <Word>$f4</Word>
+      <Word>f5</Word>
+      <Word>$f5</Word>
+      <Word>f6</Word>
+      <Word>$f6</Word>
+      <Word>f7</Word>
+      <Word>$f7</Word>
+      <Word>f8</Word>
+      <Word>$f8</Word>
+      <Word>f9</Word>
+      <Word>$f9</Word>
+      <Word>f10</Word>
+      <Word>$f10</Word>
+      <Word>f11</Word>
+      <Word>$f11</Word>
+      <Word>f12</Word>
+      <Word>$f12</Word>
+      <Word>f13</Word>
+      <Word>$f13</Word>
+      <Word>f14</Word>
+      <Word>$f14</Word>
+      <Word>f15</Word>
+      <Word>$f15</Word>
+      <Word>f16</Word>
+      <Word>$f16</Word>
+      <Word>f17</Word>
+      <Word>$f17</Word>
+      <Word>f18</Word>
+      <Word>$f18</Word>
+      <Word>f19</Word>
+      <Word>$f19</Word>
+      <Word>f20</Word>
+      <Word>$f20</Word>
+      <Word>f21</Word>
+      <Word>$f21</Word>
+      <Word>f22</Word>
+      <Word>$f22</Word>
+      <Word>f23</Word>
+      <Word>$f23</Word>
+      <Word>f24</Word>
+      <Word>$f24</Word>
+      <Word>f25</Word>
+      <Word>$f25</Word>
+      <Word>f26</Word>
+      <Word>$f26</Word>
+      <Word>f27</Word>
+      <Word>$f27</Word>
+      <Word>f28</Word>
+      <Word>$f28</Word>
+      <Word>f29</Word>
+      <Word>$f29</Word>
+      <Word>f30</Word>
+      <Word>$f30</Word>
+      <Word>f31</Word>
+      <Word>$f31</Word>
+    </Keywords>
+
+    <!-- Directives (standard assembler directives) -->
+    <Keywords color="Directive">
+      <Word>address</Word>
+      <Word>.word</Word>
+      <Word>.byte</Word>
+      <Word>.half</Word>
+      <Word>.ascii</Word>
+      <Word>.asciiz</Word>
+      <Word>.space</Word>
+      <Word>.text</Word>
+      <Word>.data</Word>
+      <Word>.globl</Word>
+      <Word>.align</Word>
+      <Word>setreg</Word>
+    </Keywords>
+
+    <!-- Special directives: print, import -->
+    <Keywords color="DirectivePrintImport">
+      <Word>print</Word>
+      <Word>import</Word>
+    </Keywords>
+
+    <!-- Special directives: hexcode, float -->
+    <Keywords color="DirectiveHexFloat">
+      <Word>hexcode</Word>
+      <Word>float</Word>
+    </Keywords>
+
+    <!-- MIPS Instructions (100+ instructions) -->
+    <Keywords color="Instruction">
+      <!-- Arithmetic -->
+      <Word>add</Word>
+      <Word>addu</Word>
+      <Word>addi</Word>
+      <Word>addiu</Word>
+      <Word>sub</Word>
+      <Word>subu</Word>
+      <Word>mult</Word>
+      <Word>multu</Word>
+      <Word>div</Word>
+      <Word>divu</Word>
+
+      <!-- Logical -->
+      <Word>and</Word>
+      <Word>andi</Word>
+      <Word>or</Word>
+      <Word>ori</Word>
+      <Word>xor</Word>
+      <Word>xori</Word>
+      <Word>nor</Word>
+      <Word>lui</Word>
+
+      <!-- Shift -->
+      <Word>sll</Word>
+      <Word>srl</Word>
+      <Word>sra</Word>
+      <Word>sllv</Word>
+      <Word>srlv</Word>
+      <Word>srav</Word>
+
+      <!-- Comparison -->
+      <Word>slt</Word>
+      <Word>sltu</Word>
+      <Word>slti</Word>
+      <Word>sltiu</Word>
+
+      <!-- Branch -->
+      <Word>beq</Word>
+      <Word>bne</Word>
+      <Word>beql</Word>
+      <Word>bnel</Word>
+      <Word>blez</Word>
+      <Word>bgtz</Word>
+      <Word>bltz</Word>
+      <Word>bgez</Word>
+      <Word>bltzal</Word>
+      <Word>bgezal</Word>
+      <Word>b</Word>
+
+      <!-- Jump -->
+      <Word>j</Word>
+      <Word>jal</Word>
+      <Word>jr</Word>
+      <Word>jalr</Word>
+
+      <!-- Load/Store -->
+      <Word>lw</Word>
+      <Word>lwu</Word>
+      <Word>sw</Word>
+      <Word>lb</Word>
+      <Word>lbu</Word>
+      <Word>lh</Word>
+      <Word>lhu</Word>
+      <Word>sb</Word>
+      <Word>sh</Word>
+      <Word>ld</Word>
+      <Word>sd</Word>
+      <Word>lq</Word>
+      <Word>sq</Word>
+
+      <!-- Move -->
+      <Word>mfhi</Word>
+      <Word>mflo</Word>
+      <Word>mthi</Word>
+      <Word>mtlo</Word>
+
+      <!-- Special -->
+      <Word>nop</Word>
+      <Word>syscall</Word>
+      <Word>break</Word>
+      <Word>sync</Word>
+      <Word>eret</Word>
+
+      <!-- 64-bit instructions -->
+      <Word>dadd</Word>
+      <Word>daddu</Word>
+      <Word>daddi</Word>
+      <Word>daddiu</Word>
+      <Word>dsub</Word>
+      <Word>dsubu</Word>
+      <Word>dsll</Word>
+      <Word>dsrl</Word>
+      <Word>dsra</Word>
+      <Word>dsllv</Word>
+      <Word>dsrlv</Word>
+      <Word>dsrav</Word>
+      <Word>dsll32</Word>
+      <Word>dsrl32</Word>
+      <Word>dsra32</Word>
+      <Word>dmult</Word>
+      <Word>dmultu</Word>
+      <Word>ddiv</Word>
+      <Word>ddivu</Word>
+
+      <!-- Coprocessor 0 -->
+      <Word>mfc0</Word>
+      <Word>mtc0</Word>
+      <Word>dmfc0</Word>
+      <Word>dmtc0</Word>
+
+      <!-- Floating Point (Coprocessor 1) -->
+      <Word>lwc1</Word>
+      <Word>swc1</Word>
+      <Word>ldc1</Word>
+      <Word>sdc1</Word>
+      <Word>mfc1</Word>
+      <Word>mtc1</Word>
+      <Word>add.s</Word>
+      <Word>sub.s</Word>
+      <Word>mul.s</Word>
+      <Word>div.s</Word>
+      <Word>abs.s</Word>
+      <Word>neg.s</Word>
+      <Word>mov.s</Word>
+      <Word>sqrt.s</Word>
+      <Word>add.d</Word>
+      <Word>sub.d</Word>
+      <Word>mul.d</Word>
+      <Word>div.d</Word>
+      <Word>abs.d</Word>
+      <Word>neg.d</Word>
+      <Word>c.eq.s</Word>
+      <Word>c.lt.s</Word>
+      <Word>c.le.s</Word>
+      <Word>bc1t</Word>
+      <Word>bc1f</Word>
+      <Word>cvt.s.w</Word>
+      <Word>cvt.w.s</Word>
+      <Word>cvt.s.d</Word>
+      <Word>cvt.d.s</Word>
+      <Word>cvt.w.d</Word>
+      <Word>cvt.d.w</Word>
+      <Word>cvt.l.s</Word>
+      <Word>cvt.l.d</Word>
+    </Keywords>
+
+  </RuleSet>
+
+</SyntaxDefinition>

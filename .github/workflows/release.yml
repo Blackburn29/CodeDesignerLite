@@ -1,0 +1,62 @@
+name: Build Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.runs-on }}
+    strategy:
+      matrix:
+        include:
+          - os: windows
+            runs-on: windows-latest
+            runtime: win-x64
+            artifact: CodeDesignerLite-win-x64.exe
+          - os: linux
+            runs-on: ubuntu-latest
+            runtime: linux-x64
+            artifact: CodeDesignerLite-linux-x64
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build and publish
+        run: |
+          dotnet publish CodeDesignerLite.Desktop/CodeDesignerLite.Desktop.csproj \
+            -c Release \
+            -r ${{ matrix.runtime }} \
+            --self-contained \
+            -p:PublishSingleFile=true \
+            -p:PublishTrimmed=false \
+            -o ./publish/${{ matrix.runtime }}
+
+      - name: Prepare artifact (Windows)
+        if: matrix.os == 'windows'
+        shell: pwsh
+        run: |
+          Move-Item ./publish/${{ matrix.runtime }}/CodeDesignerLite.Desktop.exe ./${{ matrix.artifact }}
+
+      - name: Prepare artifact (Linux)
+        if: matrix.os == 'linux'
+        run: |
+          mv ./publish/${{ matrix.runtime }}/CodeDesignerLite.Desktop ${{ matrix.artifact }}
+          chmod +x ${{ matrix.artifact }}
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.artifact }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

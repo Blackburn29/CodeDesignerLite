@@ -1,0 +1,318 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CodeDesignerLite.Desktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="700"
+        x:Class="CodeDesignerLite.Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Width="850" Height="700"
+        MinWidth="800" MinHeight="400"
+        Title="{Binding WindowTitle}">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Window.KeyBindings>
+        <KeyBinding Gesture="Ctrl+N" Command="{Binding NewFileCommand}"/>
+        <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenFileCommand}"/>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SaveFileCommand}"/>
+        <KeyBinding Gesture="Ctrl+Shift+S" Command="{Binding SaveAsCommand}"/>
+        <KeyBinding Gesture="F9" Command="{Binding CompileCommand}"/>
+        <KeyBinding Gesture="Ctrl+Shift+C" Command="{Binding CopyOutputCommand}"/>
+    </Window.KeyBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="150" MinHeight="100"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Command="{Binding NewFileCommand}" InputGesture="Ctrl+N"/>
+                <MenuItem Header="_Open..." Command="{Binding OpenFileCommand}" InputGesture="Ctrl+O"/>
+                <MenuItem Header="Open _Recent" ItemsSource="{Binding RecentFiles}">
+                    <MenuItem.Styles>
+                        <Style Selector="MenuItem" x:DataType="x:String">
+                            <Setter Property="Header" Value="{Binding}"/>
+                            <Setter Property="Command" Value="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).OpenRecentFileCommand}"/>
+                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                        </Style>
+                    </MenuItem.Styles>
+                </MenuItem>
+                <MenuItem Header="_Save" Command="{Binding SaveFileCommand}" InputGesture="Ctrl+S"/>
+                <MenuItem Header="Save _As..." Command="{Binding SaveAsCommand}" InputGesture="Ctrl+Shift+S"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Command="{Binding ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Command="{Binding AboutCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3.5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderThickness="0,0,1,0" Padding="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="INPUT" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                        <TextBlock Grid.Column="2" Text="Font Size:" FontSize="11" VerticalAlignment="Center" Margin="0,0,3,0"/>
+
+                        <ComboBox Grid.Column="3"
+                                  SelectedItem="{Binding FontSize}"
+                                  Width="50"
+                                  MinHeight="20"
+                                  MaxHeight="20"
+                                  FontSize="11"
+                                  Padding="3,0"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,10,0">
+                            <x:Int32>5</x:Int32>
+                            <x:Int32>6</x:Int32>
+                            <x:Int32>7</x:Int32>
+                            <x:Int32>8</x:Int32>
+                            <x:Int32>9</x:Int32>
+                            <x:Int32>10</x:Int32>
+                            <x:Int32>11</x:Int32>
+                            <x:Int32>12</x:Int32>
+                            <x:Int32>14</x:Int32>
+                            <x:Int32>16</x:Int32>
+                            <x:Int32>18</x:Int32>
+                            <x:Int32>20</x:Int32>
+                            <x:Int32>22</x:Int32>
+                            <x:Int32>24</x:Int32>
+                            <x:Int32>26</x:Int32>
+                            <x:Int32>28</x:Int32>
+                            <x:Int32>30</x:Int32>
+                            <x:Int32>32</x:Int32>
+                            <x:Int32>34</x:Int32>
+                            <x:Int32>36</x:Int32>
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="4" Text="Format:" FontSize="11" VerticalAlignment="Center" Margin="0,0,3,0"/>
+
+                        <TextBox Grid.Column="5"
+                                 Text="{Binding AddressFormat}"
+                                 Width="30"
+                                 MinHeight="20"
+                                 MaxHeight="20"
+                                 FontSize="11"
+                                 Padding="3,0"
+                                 MaxLength="1"
+                                 VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <avaloniaEdit:TextEditor Grid.Row="1"
+                                              x:Name="InputEditor"
+                                              FontFamily="Consolas,Liberation Mono,monospace"
+                                              FontSize="{Binding FontSize}"
+                                              ShowLineNumbers="True"
+                                              WordWrap="False"
+                                              VerticalScrollBarVisibility="Auto"
+                                              HorizontalScrollBarVisibility="Auto"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Padding="5"
+                    BorderThickness="2"
+                    BorderBrush="{Binding OutputBorderBrush}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="OUTPUT" FontWeight="Bold" FontSize="11" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding OutputLineCount, StringFormat='({0} lines)'}"
+                                       FontSize="11"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"/>
+                        </Grid>
+
+                        <Grid Margin="0,3,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Type:" FontSize="11" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                            <ComboBox Grid.Column="1"
+                                      SelectedIndex="{Binding SelectedOutputFormatIndex}"
+                                      MinHeight="20"
+                                      MaxHeight="20"
+                                      FontSize="11"
+                                      Padding="3,0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Stretch">
+                                <x:String>Gameshark (PS2)</x:String>
+                                <x:String>PNACH (PCSX2)</x:String>
+                            </ComboBox>
+                        </Grid>
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto">
+                        <TextBox Text="{Binding OutputText}"
+                                 IsReadOnly="True"
+                                 FontFamily="Consolas,Liberation Mono,monospace"
+                                 FontSize="{Binding FontSize}"
+                                 AcceptsReturn="True"
+                                 TextWrapping="NoWrap"
+                                 BorderThickness="0"
+                                 Padding="2"/>
+                    </ScrollViewer>
+
+                    <Grid Grid.Row="2" Margin="0,5,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                Content="COMPILE"
+                                Command="{Binding CompileCommand}"
+                                Classes="CompileButton"
+                                Margin="0,0,0,5"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Height="32"
+                                ToolTip.Tip="Compile (F9)"/>
+
+                        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                Content="COPY"
+                                Command="{Binding CopyOutputCommand}"
+                                Classes="CopyButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Margin="0,0,0,5"
+                                Height="32"/>
+
+                        <Button Grid.Row="2" Grid.Column="0"
+                                Content="NEW"
+                                Command="{Binding NewFileCommand}"
+                                Classes="StandardButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Margin="0,0,2.5,5"
+                                Height="32"/>
+                        <Button Grid.Row="2" Grid.Column="1"
+                                Content="OPEN"
+                                Command="{Binding OpenFileCommand}"
+                                Classes="StandardButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Margin="2.5,0,0,5"
+                                Height="32"/>
+
+                        <Button Grid.Row="3" Grid.Column="0"
+                                Content="SAVE"
+                                Command="{Binding SaveFileCommand}"
+                                Classes="StandardButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Margin="0,0,2.5,0"
+                                Height="32"/>
+                        <Button Grid.Row="3" Grid.Column="1"
+                                Content="SAVE AS"
+                                Command="{Binding SaveAsCommand}"
+                                Classes="StandardButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Margin="2.5,0,0,0"
+                                Height="32"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <GridSplitter Grid.Row="2"
+                      Height="4"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      IsVisible="{Binding HasErrors}"/>
+
+        <Border Grid.Row="3"
+                BorderThickness="0,1,0,0"
+                Padding="5"
+                IsVisible="{Binding HasErrors}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="{Binding ErrorSummary}"
+                           FontWeight="Bold"
+                           Margin="0,0,0,5"/>
+
+                <DataGrid Grid.Row="1"
+                          ItemsSource="{Binding CompilationErrors}"
+                          IsReadOnly="True"
+                          GridLinesVisibility="None"
+                          HeadersVisibility="Column"
+                          AutoGenerateColumns="False"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="True"
+                          CanUserSortColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Line" Binding="{Binding LineNumber}" Width="60"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Message}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="4"
+                BorderThickness="0,1,0,0"
+                Padding="5,3"
+                Background="{StaticResource EditorBackgroundBrush}">
+            <TextBlock Text="{Binding StatusMessage}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       FontSize="11"/>
+        </Border>
+    </Grid>
+</Window>

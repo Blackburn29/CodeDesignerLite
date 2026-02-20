@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+; Associate .cds extension with CodeDesignerLite
+[HKEY_CURRENT_USER\Software\Classes\.cds]
+@="CodeDesignerLite.Script"
+"Content Type"="application/x-cds"
+
+[HKEY_CURRENT_USER\Software\Classes\CodeDesignerLite.Script]
+@="Code Designer Script"
+
+[HKEY_CURRENT_USER\Software\Classes\CodeDesignerLite.Script\DefaultIcon]
+@="C:\\Program Files\\CodeDesignerLite\\CodeDesignerLite.exe,0"
+
+[HKEY_CURRENT_USER\Software\Classes\CodeDesignerLite.Script\shell\open\command]
+@="\"C:\\Program Files\\CodeDesignerLite\\CodeDesignerLite.exe\" \"%1\""

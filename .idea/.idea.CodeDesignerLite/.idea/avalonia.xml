@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="CodeDesignerLite.Desktop/Styles/DarkTheme.axaml" value="CodeDesignerLite.Desktop/CodeDesignerLite.Desktop.csproj" />
+        <entry key="CodeDesignerLite.Desktop/Views/MainWindow.axaml" value="CodeDesignerLite.Desktop/CodeDesignerLite.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

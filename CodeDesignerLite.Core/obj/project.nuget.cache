@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "6M2RTflZPSo=",
+  "success": true,
+  "projectFilePath": "/home/blake/CodeDesignerLite/CodeDesignerLite.Core/CodeDesignerLite.Core.csproj",
+  "expectedPackageFiles": [
+    "/home/blake/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.3/microsoft.aspnetcore.app.ref.10.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

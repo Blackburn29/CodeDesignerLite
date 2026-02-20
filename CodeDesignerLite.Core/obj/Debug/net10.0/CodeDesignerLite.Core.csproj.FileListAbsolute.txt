@@ -1,0 +1,12 @@
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/bin/Debug/net10.0/CodeDesignerLite.Core.deps.json
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/bin/Debug/net10.0/CodeDesignerLite.Core.dll
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/bin/Debug/net10.0/CodeDesignerLite.Core.pdb
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/CodeDesignerLite.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/CodeDesignerLite.Core.AssemblyInfoInputs.cache
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/CodeDesignerLite.Core.AssemblyInfo.cs
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/CodeDesignerLite.Core.csproj.CoreCompileInputs.cache
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/CodeDesignerLite.Core.sourcelink.json
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/CodeDesignerLite.Core.dll
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/refint/CodeDesignerLite.Core.dll
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/CodeDesignerLite.Core.pdb
+/home/blake/CodeDesignerLite/CodeDesignerLite.Core/obj/Debug/net10.0/ref/CodeDesignerLite.Core.dll
