@@ -2,6 +2,9 @@
 
 Cross-platform MIPS Assembly Compiler for PlayStation 2
 
+<img width="849" height="805" alt="image" src="https://github.com/user-attachments/assets/bf76af77-00ce-411f-958f-e20c1dee75d9" />
+
+
 ## About
 
 Code Designer Lite is a modern rewrite of Code Designer 2.3 by Gtlcpimp, rebuilt with .NET 10 and Avalonia UI for cross-platform support.
@@ -46,8 +49,6 @@ Code Designer Lite is a modern rewrite of Code Designer 2.3 by Gtlcpimp, rebuilt
 - **Label Support**: Case-insensitive labels with FNC prefix highlighting
 - **Float Conversion**: Decimal to float conversion with `float` directive
 - **Custom Directives**: `address`, `hexcode`, `setreg`, `print`, and more
-
-![cds5](https://github.com/user-attachments/assets/c08b6671-ed45-405a-bbee-8ddfd6a41114)
 
 ## Requirements
 
